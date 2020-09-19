@@ -18,7 +18,6 @@ namespace LoggingKata.Test
 
             //Assert
             Assert.NotNull(actual);
-
         }
 
         [Theory]
@@ -30,14 +29,31 @@ namespace LoggingKata.Test
             //       each representing a TacoBell location
 
             //Arrange
+            var testLongitude = new TacoParser();
 
             //Act
+            var actual = testLongitude.Parse(line);
 
             //Assert
+            Assert.Equal(expected, actual.Location.Longitude);
         }
 
 
         //TODO: Create a test ShouldParseLatitude
+        [Theory]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", 34.073638)]
+        public void ShouldParseLatitude(string line, double expected)
+        {
+            //Arrange
+            var testLatitude = new TacoParser();
+
+            //Act
+            var actual = testLatitude.Parse(line);
+
+            //Assert
+            Assert.Equal(expected, actual.Location.Latitude);
+        }
+
 
     }
 }
